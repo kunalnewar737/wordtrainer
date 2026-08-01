@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>My Custom Word Trainer</title>
+  <style>
+    body { 
+      font-family: sans-serif; 
+      display: flex; 
+      flex-direction: column; 
+      align-items: center; 
+      padding-top: 100px; 
+      background-color: #f4f4f9;
+    }
+    .card { 
+      background: white;
+      border: 1px solid #ccc; 
+      padding: 40px; 
+      border-radius: 12px; 
+      text-align: center; 
+      width: 300px; 
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1); 
+    }
+    h1 { margin: 0 0 30px 0; font-size: 2.5rem; color: #333;}
+    button { 
+      padding: 12px 24px; 
+      margin: 5px; 
+      cursor: pointer; 
+      border: none; 
+      border-radius: 6px; 
+      background: #007bff; 
+      color: white; 
+      font-weight: bold;
+      font-size: 1rem;
+    }
+    button:hover { background: #0056b3; }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <h1 id="wordDisplay">Word</h1>
+    <button onclick="nextWord()">Next Random Word</button>
+  </div>
+
+  <script>
+    // 1. YOUR DATA: Just list your words here!
+    // Make sure each word is in quotes and followed by a comma.
+    const words = [
+      "Flower",
+      "Tree",
+      "Pen",
+      "Moon",
+      "Bottle",
+      "Cup",
+      "Mug",
+      "House",
+      "Fish",
+      "Sun",
+      "Car",
+      "Plane",
+      "Ball",
+      "Glass",
+      "Leaf",
+      "Man",
+      "Boat",
+      "Table",
+      "Cat",
+      "Stickman",
+      "Heart",
+      "Star"
+
+    ];
+
+    let currentIndex = -1; // Starts empty so the first word is properly randomized
+
+    // 2. YOUR LOGIC
+    function updateCard() {
+      // Display the word from the list
+      document.getElementById('wordDisplay').innerText = words[currentIndex];
+    }
+
+    function nextWord() {
+      // Pick a random number between 0 and the total number of words you added
+      let newIndex = Math.floor(Math.random() * words.length);
+      
+      // Prevent showing the exact same word twice in a row (if you have more than 1 word)
+      while (newIndex === currentIndex && words.length > 1) {
+        newIndex = Math.floor(Math.random() * words.length);
+      }
+      
+      currentIndex = newIndex;
+      updateCard();
+    }
+
+    // Start the app by loading a random word as soon as you open the page
+    nextWord();
+  </script>
+
+</body>
+</html>
