@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Card & Number Generator</title>
+  <style>
+    body { 
+      font-family: sans-serif; 
+      display: flex; 
+      flex-direction: column; 
+      align-items: center; 
+      padding-top: 80px; 
+      background-color: #f4f4f9;
+    }
+    .main-container {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      justify-content: center;
+      max-width: 800px;
+    }
+    .box { 
+      background: white;
+      border: 1px solid #ccc; 
+      padding: 40px 20px; 
+      border-radius: 12px; 
+      text-align: center; 
+      width: 280px; 
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1); 
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .label {
+      font-size: 0.9rem;
+      color: #777;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 15px;
+    }
+    h1 { 
+      margin: 0 0 30px 0; 
+      font-size: 2.2rem; 
+      color: #333;
+      min-height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    button { 
+      padding: 15px 20px; 
+      cursor: pointer; 
+      border: none; 
+      border-radius: 6px; 
+      background: #007bff; 
+      color: white; 
+      font-weight: bold;
+      font-size: 1.1rem;
+      transition: background 0.2s;
+      width: 100%;
+    }
+    button:hover { background: #0056b3; }
+    
+    .secondary-btn { background: #28a745; }
+    .secondary-btn:hover { background: #218838; }
+  </style>
+</head>
+<body>
+
+  <div class="main-container">
+    
+    <!-- Card Display Section -->
+    <div class="box">
+      <div class="label">Playing Card</div>
+      <h1 id="cardDisplay">?</h1>
+      <button onclick="generateCard()">Random Playing Card</button>
+    </div>
+
+    <!-- Number Display Section -->
+    <div class="box">
+      <div class="label">Number (1-52)</div>
+      <h1 id="numberDisplay">?</h1>
+      <button class="secondary-btn" onclick="generateNumber()">Random Number</button>
+    </div>
+
+  </div>
+
+  <script>
+    // The building blocks for the 52 deck of cards
+    const suits = ["Hearts ♥", "Diamonds ♦", "Clubs ♣", "Spades ♠"];
+    const values = ["Ace", "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King"];
+
+    function generateCard() {
+      // Pick a random value and a random suit
+      const randomValue = values[Math.floor(Math.random() * values.length)];
+      const randomSuit = suits[Math.floor(Math.random() * suits.length)];
+      
+      // Combine them and display in the Card section
+      const cardDisplay = document.getElementById('cardDisplay');
+      cardDisplay.innerText = `${randomValue} of ${randomSuit}`;
+      
+      // Reset text color to black, then change to red if Heart or Diamond
+      cardDisplay.style.color = "#333";
+      if (randomSuit.includes("Hearts") || randomSuit.includes("Diamonds")) {
+        cardDisplay.style.color = "#d90000";
+      }
+    }
+
+    function generateNumber() {
+      // Generate a random number between 1 and 52
+      const randomNumber = Math.floor(Math.random() * 52) + 1;
+      
+      // Display in the Number section
+      document.getElementById('numberDisplay').innerText = randomNumber;
+    }
+  </script>
+
+</body>
+</html>
